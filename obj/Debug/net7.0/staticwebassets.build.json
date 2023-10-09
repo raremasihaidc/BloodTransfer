@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "s6UJd6EZo6DNZyJmFlLS96uEw7wvjBzyao50AGkJjfQ=",
+  "Source": "BloodTransferAPI",
+  "BasePath": "_content/BloodTransferAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
