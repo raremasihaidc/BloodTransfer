@@ -31,7 +31,7 @@ namespace BloodTransferAPI.Controllers
         public IActionResult AddReciever(RecieverDTO addReciever)
         {
             var model = _mapper.Map<BloodTransferModel>(addReciever);
-           if (addReciever.UserId!=null||addReciever.UserId!=0)
+           if (addReciever.UserId==null||addReciever.UserId!=0)
            {
              return BadRequest("you shoudnt insert UserId manually (system will do this automatically , please set 0 as defualt)");
             }
