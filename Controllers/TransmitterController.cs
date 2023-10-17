@@ -62,13 +62,20 @@ namespace BloodTransferAPI.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteTransmitter(int id)
         {
-            var model = _transmitterHandler.GetById(id);
-            if (id == null || id == 0)
-            {
-                return BadRequest("not found");
-            }
-            _transmitterHandler.Delete(model);
-            return Ok();
+           try
+               {
+                   var model = _transmitterHandler.GetById(id);
+                   if (id == null || id == 0)
+                  {
+                      return BadRequest("not found");
+                  }
+                     _transmitterHandler.Delete(model);
+                     return Ok();
+              }
+              catch (Exception ex)
+                 {
+                  return BadRequest("id not found");
+                }
         }
     }
 
