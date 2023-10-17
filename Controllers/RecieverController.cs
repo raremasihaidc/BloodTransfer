@@ -67,13 +67,20 @@ namespace BloodTransferAPI.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteReciever(int id)
         {
-            var model = _recieverHandler.GetById(id);
-            if (id == null || id == 0)
-            {
-                return BadRequest("feilds cant be Null ");
-            }
-            _recieverHandler.Delete(model);
-            return Ok();
+            try
+                {
+                 var model = _recieverHandler.GetById(id);
+                if (id == null || id == 0)
+                  {
+                      return BadRequest("feilds cant be Null ");
+                 }
+                   _recieverHandler.Delete(model);
+                    return Ok();
+               }
+           catch (Exception ex)
+               {
+               return BadRequest("id not found");
+              }
         }
     }
 }
