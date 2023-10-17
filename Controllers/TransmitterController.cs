@@ -27,10 +27,10 @@ namespace BloodTransferAPI.Controllers
         public IActionResult AddTransmitter(TransmitterDTO addTransmitter)
         {
             var model = _mapper.Map<BloodTransferModel>(addTransmitter);
-            if (addTransmitter.UserId != null || addTransmitter.UserId != 0)
-            {
-                return BadRequest("you shoudnt insert UserId manually (system will do this automatically)");
-            }
+          //  if (addTransmitter.UserId != null || addTransmitter.UserId != 0)
+          //  {
+          //      return BadRequest("you shoudnt insert UserId manually (system will do this automatically)");
+          //  }
             if (string.IsNullOrEmpty(addTransmitter.FullName) ||
                 string.IsNullOrEmpty(addTransmitter.BloodGroupType) ||
                 string.IsNullOrEmpty(addTransmitter.UnitOfBlood.ToString()) ||
