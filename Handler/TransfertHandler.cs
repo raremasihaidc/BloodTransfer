@@ -9,7 +9,6 @@ namespace BloodTransferAPI.Handler
 {
     public class TransfertHandler : ITransferHandler
     {
-        public Boolean Transaction = true;
         private readonly IUnitOfWork _unitOfWork;
         private readonly AppDbContext _appDbContext;
         private readonly ITransferRepository _repository;
@@ -36,9 +35,9 @@ namespace BloodTransferAPI.Handler
                     _repository.Update(transmitter);
                     _repository.Update(reciever);
                 }
-                else {
-                    Transaction = false; }
-            } 
+                    else {
+                          throw new Exception("The blood group types of the transmitter and receiver do not match.");
+                        }
             _unitOfWork.save();
         }
         public List<BloodTransferModel> Get()
