@@ -33,13 +33,20 @@ namespace BloodTransferAPI.Controllers
         [HttpPut]
         public IActionResult UpdateTransfer(TransferDTO updateTransfer)
         {
-            if (updateTransfer?.RecieverId == 0 || updateTransfer?.TransmiiterId == 0)
-            {
-               return BadRequest("fields cant be Null");
-            } 
-            _transferHandler.Update(updateTransfer);
-            return Ok();
-
+           try
+         {
+             if (updateTransfer?.RecieverId == 0 || updateTransfer?.TransmiiterId == 0)
+             {
+             return BadRequest("fields cant be Null");
+             }
+             _transferHandler.Update(updateTransfer);
+             return Ok();
+         }
+         catch (Exception ex)
+          {
+            return BadRequest("The blood group types of the transmitter and receiver do not match.");
+          }
+       
         }
     }
 }
