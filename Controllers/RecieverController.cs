@@ -31,10 +31,10 @@ namespace BloodTransferAPI.Controllers
         public IActionResult AddReciever(RecieverDTO addReciever)
         {
             var model = _mapper.Map<BloodTransferModel>(addReciever);
-            if (addReciever.UserId != null||addReciever.UserId!=0)
-            {
-                return BadRequest("you shoudnt insert UserId manually (system will do this automatically)");
-            }
+         //   if (addReciever.UserId != null||addReciever.UserId!=0)
+          //  {
+          //      return BadRequest("you shoudnt insert UserId manually (system will do this automatically)");
+          //  }
             if (string.IsNullOrEmpty(addReciever.FullName) ||
                 string.IsNullOrEmpty(addReciever.UnitOfBlood.ToString())||
                 string.IsNullOrEmpty(addReciever.BloodGroupType) ||
