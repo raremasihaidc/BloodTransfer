@@ -31,37 +31,38 @@ namespace BloodTransferAPI.Controllers
         public IActionResult AddReciever(RecieverDTO addReciever)
         {
             var model = _mapper.Map<BloodTransferModel>(addReciever);
-         //   if (addReciever.UserId != null||addReciever.UserId!=0)
-          //  {
-          //      return BadRequest("you shoudnt insert UserId manually (system will do this automatically)");
-          //  }
-            if (string.IsNullOrEmpty(addReciever.FullName) ||
-                string.IsNullOrEmpty(addReciever.UnitOfBlood.ToString())||
-                string.IsNullOrEmpty(addReciever.BloodGroupType) ||
-                string.IsNullOrEmpty(addReciever.NumberOfRecieving.ToString()) ||
-                string.IsNullOrEmpty(addReciever.RecieverId.ToString()))
+           if (addReciever.UserId!=null||addReciever.UserId!=0)
+           {
+             return BadRequest("you shoudnt insert UserId manually (system will do this automatically , please set 0 as defualt)");
+            }
+
+            if(( addReciever.UnitOfBlood == null || addReciever.UnitOfBlood==0)||
+               (addReciever.NumberOfRecieving==null|| addReciever.NumberOfRecieving==0)||
+               (addReciever.RecieverId==null || addReciever.RecieverId==0)||
+               (addReciever.FullName==null||addReciever.FullName=="string")||
+               (addReciever.BloodGroupType==null||addReciever.BloodGroupType=="string"))
             {
                 return BadRequest("fields cant be Null");
             }
             _recieverHandler.Add(model);
             return Ok();
-        }
+            }
 
         [HttpPut]
         public IActionResult UpdateReciever(RecieverDTO updateReciever)
         {
-            if (string.IsNullOrEmpty(updateReciever.UserId.ToString()) ||
-                string.IsNullOrEmpty(updateReciever.FullName) ||
-                string.IsNullOrEmpty(updateReciever.BloodGroupType) ||
-                string.IsNullOrEmpty(  updateReciever.UnitOfBlood.ToString())||
-                string.IsNullOrEmpty(updateReciever.NumberOfRecieving.ToString()) ||
-                string.IsNullOrEmpty(updateReciever.RecieverId.ToString()))
-            {
-                return BadRequest("fields cant be Null");
-            }
-            _recieverHandler.Update(updateReciever);
-            return Ok();
-        }
+            if ((updateReciever.UserId==null||updateReciever.UserId!=0)||
+               (updateReciever.UnitOfBlood == null || updateReciever.UnitOfBlood == 0) ||
+               (updateReciever.NumberOfRecieving == null || updateReciever.NumberOfRecieving == 0) ||
+               (updateReciever.RecieverId == null || updateReciever.RecieverId == 0) ||
+               (updateReciever.FullName == null || updateReciever.FullName == "string") ||
+              (updateReciever.BloodGroupType == null || updateReciever.BloodGroupType == "string"))
+             {
+              return BadRequest("fields cant be Null");
+             }
+               _recieverHandler.Update(updateReciever);
+             return Ok();
+          }
 
         [HttpDelete("{id}")]
         public IActionResult DeleteReciever(int id)
