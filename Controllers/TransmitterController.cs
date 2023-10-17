@@ -26,38 +26,38 @@ namespace BloodTransferAPI.Controllers
         [HttpPost]
         public IActionResult AddTransmitter(TransmitterDTO addTransmitter)
         {
-            var model = _mapper.Map<BloodTransferModel>(addTransmitter);
-          //  if (addTransmitter.UserId != null || addTransmitter.UserId != 0)
-          //  {
-          //      return BadRequest("you shoudnt insert UserId manually (system will do this automatically)");
-          //  }
-            if (string.IsNullOrEmpty(addTransmitter.FullName) ||
-                string.IsNullOrEmpty(addTransmitter.BloodGroupType) ||
-                string.IsNullOrEmpty(addTransmitter.UnitOfBlood.ToString()) ||
-                string.IsNullOrEmpty(addTransmitter.NumberOfTransmitting.ToString())||
-                string.IsNullOrEmpty(addTransmitter.TransmiiterId.ToString()))
+           var model = _mapper.Map<BloodTransferModel>(addTransmitter);
+             if (addTransmitter.UserId == null || addTransmitter.UserId != 0)
+             {
+               return BadRequest("you shoudnt insert UserId manually (system will do this automatically , please set 0 as defualt)");
+              }
+           if ((addTransmitter.UnitOfBlood == null || addTransmitter.UnitOfBlood == 0) ||
+             (addTransmitter.NumberOfTransmitting == null || addTransmitter.NumberOfTransmitting == 0) ||
+             (addTransmitter.TransmiiterId == null || addTransmitter.TransmiiterId == 0) ||
+            (addTransmitter.FullName == null || addTransmitter.FullName == "string") ||
+            (addTransmitter.BloodGroupType == null || addTransmitter.BloodGroupType == "string"))
             {
-                return BadRequest("fields cant be Null");
-            }
-            _transmitterHandler.Add(model);
+             return BadRequest("fields cant be Null");
+             }
+           _transmitterHandler.Add(model);
             return Ok();
         }
 
         [HttpPut]
         public IActionResult UpdateTransmitter(TransmitterDTO updateTransmitter)
         {
-            if (string.IsNullOrEmpty(updateTransmitter.UserId.ToString()) ||
-               string.IsNullOrEmpty(updateTransmitter.FullName) ||
-               string.IsNullOrEmpty(updateTransmitter.BloodGroupType) ||
-               string.IsNullOrEmpty(updateTransmitter.UnitOfBlood.ToString()) ||
-               string.IsNullOrEmpty(updateTransmitter.NumberOfTransmitting.ToString()) ||
-               string.IsNullOrEmpty(updateTransmitter.TransmiiterId.ToString()))
-            {
-                return BadRequest("fields cant be Null");
-            }
-            _transmitterHandler.Update(updateTransmitter);
-            return Ok();
-        }
+              if ((updateTransmitter.UserId == null || updateTransmitter.UserId != 0) ||
+                 (updateTransmitter.UnitOfBlood == null || updateTransmitter.UnitOfBlood == 0) ||
+                 (updateTransmitter.NumberOfTransmitting == null || updateTransmitter.NumberOfTransmitting == 0) ||
+                (updateTransmitter.TransmiiterId == null || updateTransmitter.TransmiiterId == 0) ||
+                (updateTransmitter.FullName == null || updateTransmitter.FullName == "string") ||
+               (updateTransmitter.BloodGroupType == null || updateTransmitter.BloodGroupType == "string"))
+              {
+                   return BadRequest("fields cant be Null");
+              }
+                _transmitterHandler.Update(updateTransmitter);
+              return Ok();
+              }
 
         [HttpDelete("{id}")]
         public IActionResult DeleteTransmitter(int id)
